@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0712">
+  <meta name="description" content="VYRO Marketing : outils de marketing digital pour développer votre activité.">
+  <title>VYRO Marketing | Digital</title>
+  <style>
+    :root {
+      --bg: #0b0712;
+      --panel: #171020;
+      --purple: #914cff;
+      --text: #f7f2ff;
+      --muted: #b9adc9;
+      --border: #352542;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top right, #291344, var(--bg) 55%);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      background: linear-gradient(135deg, #b16cff, #7131e8);
+      border-radius: 15px;
+      padding: 8px 16px;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .brand-name { font-size: 23px; font-weight: 900; letter-spacing: 2px; }
+    .brand-sub { color: var(--muted); font-size: 11px; letter-spacing: 3px; }
+    main { max-width: 850px; margin: auto; padding: 35px 20px; }
+    .eyebrow { color: #c59cff; font-weight: bold; letter-spacing: 2px; }
+    h1 { font-size: clamp(38px, 8vw, 64px); line-height: 1.08; margin: 16px 0; }
+    h1 span { color: #a56aff; }
+    p { color: var(--muted); }
+    .hero-text { font-size: 18px; max-width: 620px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 25px 0; }
+    button, .button {
+      border: 0; border-radius: 12px; padding: 14px 18px;
+      background: linear-gradient(135deg, #a365ff, #7838e8);
+      color: white; font-weight: bold; font-size: 15px;
+      text-decoration: none; cursor: pointer;
+    }
+    .secondary { background: var(--panel); border: 1px solid var(--border); }
+    .stats, .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 35px 0; }
+    .card {
+      background: rgba(23,16,32,.94); border: 1px solid var(--border);
+      border-radius: 18px; padding: 18px;
+    }
+    .stat-number { font-size: 28px; font-weight: bold; }
+    h2 { margin-top: 35px; }
+    label { display: block; margin: 12px 0 5px; font-weight: bold; }
+    input, textarea, select {
+      width: 100%; padding: 13px; border-radius: 10px;
+      background: #0e0a16; color: white; border: 1px solid var(--border);
+      font: inherit;
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    .tool-card h3 { margin-top: 0; }
+    .result { white-space: pre-wrap; overflow-wrap: anywhere; color: white; }
+    footer { text-align: center; border-top: 1px solid var(--border); padding: 25px; color: var(--muted); }
+    @media (max-width: 520px) {
+      .stats, .tools { grid-template-columns: 1fr; }
+      header { padding: 15px; }
+      main { padding: 28px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">V</div>
+      <div>
+        <div class="brand-name">VYRO</div>
+        <div class="brand-sub">MARKETING DIGITAL</div>
+      </div>
+    </div>
+    <span style="color:#80e8c1;font-size:12px">● Espace digital</span>
+  </header>
+
+  <main>
+    <div class="eyebrow">TA BOÎTE À OUTILS MARKETING</div>
+    <h1>Fais grandir ton <span>business.</span></h1>
+    <p class="hero-text">
+      Prépare tes idées publicitaires, organise tes prospects
+      et construis tes prochaines actions marketing depuis ton téléphone.
+    </p>
+    <div class="actions">
+      <a class="button" href="#publicite">Créer une publicité ↗</a>
+      <a class="button secondary" href="#prospects">Gérer mes prospects</a>
+    </div>
+
+    <div class="stats">
+      <div class="card"><div class="stat-number" id="countProspects">0</div><div>Prospects enregistrés</div></div>
+      <div class="card"><div class="stat-number" id="countAds">0</div><div>Textes créés</div></div>
+      <div class="card"><div class="stat-number">3</div><div>Outils disponibles</div></div>
+    </div>
+
+    <section id="publicite" class="card">
+      <h2>✦ Créateur de publicité</h2>
+      <p>Prépare un texte promotionnel à adapter à ton commerce.</p>
+      <label for="business">Nom du commerce</label>
+      <input id="business" placeholder="Ex. Boutique Ange">
+      <label for="product">Produit ou service</label>
+      <input id="product" placeholder="Ex. chaussures, pressing, coiffure">
+      <label for="offer">Offre ou prix</label>
+      <input id="offer" placeholder="Ex. Promotion spéciale à partir de 1 000 F">
+      <label for="contact">Contact WhatsApp (facultatif)</label>
+      <input id="contact" placeholder="Ex. 2250700000000">
+      <button onclick="createAd()">Générer mon texte</button>
+      <div id="adResult" class="card" style="margin-top:18px;display:none">
+        <div id="adText" class="result"></div>
+        <button style="margin-top:12px" onclick="copyAd()">Copier le texte</button>
+      </div>
+    </section>
+
+    <section id="prospects" class="card" style="margin-top:22px">
+      <h2>♧ Gestion des prospects</h2>
+      <p>Enregistre les commerçants que tu souhaites contacter. Les données sont conservées sur ce navigateur uniquement.</p>
+      <label for="prospectName">Nom du prospect / commerce</label>
+      <input id="prospectName" placeholder="Nom du commerçant">
+      <label for="prospectPhone">Téléphone ou WhatsApp</label>
+      <input id="prospectPhone" placeholder="Numéro de contact">
+      <label for="prospectNote">Besoin ou suivi</label>
+      <input id="prospectNote" placeholder="Ex. À contacter vendredi">
+      <button onclick="addProspect()">Enregistrer le prospect</button>
+      <div id="prospectList" style="margin-top:18px"></div>
+    </section>
+
+    <section class="tools">
+      <div class="card tool-card">
+        <h3>📣 Publicité</h3>
+        <p>Prépare des textes promotionnels adaptés à tes offres.</p>
+      </div>
+      <div class="card tool-card">
+        <h3>👥 Prospects</h3>
+        <p>Organise tes contacts commerciaux et tes suivis.</p>
+      </div>
+      <div class="card tool-card">
+        <h3>🚀 Stratégie</h3>
+        <p>Définis une offre claire et un appel à l'action.</p>
+      </div>
+    </section>
+    <p style="font-size:12px">Version initiale : les données restent dans le stockage local de ton navigateur. Ce site ne possède pas encore de compte utilisateur ni de base de données en ligne.</p>
+  </main>
+
+  <footer>© <span id="year"></span> VYRO Marketing — Grandissons ensemble.</footer>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    let prospects = [];
+    let ads = 0;
+
+    try {
+      prospects = JSON.parse(localStorage.getItem('vyroProspects') || '[]');
+    } catch (e) { prospects = []; }
+
+    function updateStats() {
+      $('countProspects').textContent = prospects.length;
+      $('countAds').textContent = ads;
+    }
+
+    function createAd() {
+      const business = $('business').value.trim();
+      const product = $('product').value.trim();
+      const offer = $('offer').value.trim();
+      const contact = $('contact').value.trim();
+
+      if (!business || !product) {
+        alert('Entre le nom du commerce et le produit ou service.');
+        return;
+      }
+
+      let text = '✨ ' + business.toUpperCase() + ' ✨\n\n';
+      text += 'Tu recherches ' + product + ' ? Nous sommes là pour toi !\n';
+      if (offer) text += '\n🎁 Offre : ' + offer + '\n';
+      text += '\n✅ Service et accueil au rendez-vous.\n';
+      if (contact) text += '\n📲 Contact WhatsApp : ' + contact + '\n';
+      text += '\nÉcris-nous dès maintenant pour en savoir plus !';
+      $('adText').textContent = text;
+      $('adResult').style.display = 'block';
+      ads++;
+      updateStats();
+    }
+
+    async function copyAd() {
+      const text = $('adText').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Texte copié !');
+      } catch (e) {
+        alert('Sélectionne le texte affiché et copie-le manuellement.');
+      }
+    }
+
+    function addProspect() {
+      const name = $('prospectName').value.trim();
+      const phone = $('prospectPhone').value.trim();
+      const note = $('prospectNote').value.trim();
+
+      if (!name) {
+        alert('Entre le nom du prospect.');
+        return;
+      }
+
+      prospects.push({ name, phone, note });
+      try {
+        localStorage.setItem('vyroProspects', JSON.stringify(prospects));
+      } catch (e) {}
+
+      renderProspects();
+      updateStats();
+      $('prospectName').value = '';
+      $('prospectPhone').value = '';
+      $('prospectNote').value = '';
+    }
+
+    function renderProspects() {
+      const list = $('prospectList');
+      list.replaceChildren();
+
+      if (!prospects.length) {
+        list.textContent = 'Aucun prospect enregistré pour le moment.';
+        return;
+      }
+
+      prospects.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.marginTop = '10px';
+        const title = document.createElement('strong');
+        title.textContent = p.name;
+        card.appendChild(title);
+
+        [p.phone, p.note].filter(Boolean).forEach(value => {
+          const line = document.createElement('p');
+          line.textContent = value;
+          card.appendChild(line);
+        });
+
+        const remove = document.createElement('button');
+        remove.className = 'secondary';
+        remove.textContent = 'Supprimer';
+        remove.onclick = () => {
+          prospects.splice(i, 1);
+          try {
+            localStorage.setItem('vyroProspects', JSON.stringify(prospects));
+          } catch (e) {}
+          renderProspects();
+          updateStats();
+        };
+        card.appendChild(remove);
+        list.appendChild(card);
+      });
+    }
+
+    $('year').textContent = new Date().getFullYear();
+    renderProspects();
+    updateStats();
+  </script>
+</body>
+</html>
